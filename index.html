@@ -20,10 +20,12 @@
       <li></li>
      </ul>
     </div>
-    <table class="shop">
-     <tr>
-      <td class="item" ng-repeat="saber in sabers">
+    <table class="shop" ng-init="saberRows()">
+     <tr class="row" ng-repeat="row in rows track by $index">
+      <td class="item" ng-repeat="saber in row track by $index">
        <img ng-src="{{saber.imgsrc}}">
+       <h3 class="name">{{saber.name}}</h3>
+       <h4 class="price">{{saber.price}}</h4>
       </td>
      </tr>
     </table>
@@ -31,7 +33,7 @@
     </div>
    </div>
   </div>
-  <script src="script.js"></script>
+  <script src="data.js"></script>
   <script src="app.js"></script>
  </body>
 </html>
