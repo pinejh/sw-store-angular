@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="storeApp">
  <head>
   <title></title>
   <link type="text/css" rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
  </head>
  <body>
-  <div class="container">
+  <div class="container" ng-controller="storeCtrl">
    <div class="hero">
     <img src="images/logo.png"/>
    </div>
@@ -20,12 +21,17 @@
      </ul>
     </div>
     <table class="shop">
+     <tr>
+      <td class="item" ng-repeat="saber in sabers">
+       <img ng-src="{{saber.imgsrc}}">
+      </td>
+     </tr>
     </table>
     <div id="window">
     </div>
    </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
   <script src="script.js"></script>
+  <script src="app.js"></script>
  </body>
 </html>
