@@ -20,12 +20,12 @@
       <li></li>
      </ul>
     </div>
-    <table class="shop" ng-init="setTab(2);setTab(0)">
+    <table class="shop">
      <tr class="row" ng-repeat="row in rows track by $index">
       <td class="item" ng-click="openItem($parent.$index*3+$index)" ng-repeat="item in row track by $index">
        <img ng-src="{{item.imgsrc}}">
        <h3 class="name">{{item.name}}</h3>
-       <h4 class="price">{{item.price}}</h4>
+       <h4 class="price">{{item.price|currency}}</h4>
       </td>
      </tr>
     </table>
@@ -43,7 +43,6 @@
     </div>
    </div>
   </div>
-  <script src="data.js"></script>
   <script src="app.js"></script>
  </body>
 </html>

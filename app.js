@@ -1,6 +1,13 @@
 var storeApp = angular.module('storeApp', []);
 
-storeApp.controller('storeCtrl', function storeCtrl($scope) {
+storeApp.controller('storeCtrl', function storeCtrl($scope, $http) {
+ $http.get('data.json').success(function(data){
+  $scope.sabers = data[0];
+  $scope.blasters = data[1];
+  $scope.setTab(2);
+  $scope.setTab(0);
+ });
+ $scope.cart = []
  $scope.setRows = function (items) {
   var row = [], data = [], i;
   for (i = 0; i < items.length; i += 1) {
@@ -24,13 +31,13 @@ storeApp.controller('storeCtrl', function storeCtrl($scope) {
    $scope.currTab = tab;
    switch (tab) {
     case 1:
-     $scope.setRows(blasters);
+     $scope.setRows($scope.blasters);
      break;
     case 2:
-     $scope.setRows(cart);
+     $scope.setRows($scope.cart);
      break;
     default:
-     $scope.setRows(sabers);
+     $scope.setRows($scope.sabers);
    }
   }
  };
@@ -41,17 +48,17 @@ storeApp.controller('storeCtrl', function storeCtrl($scope) {
  };
  $scope.currItem = {};
  $scope.addToCart = function (index) {
-  if ($scope.currTab === 0) cart.push(sabers[index]);
-  else if ($scope.currTab === 1) cart.push(blasters[index]);
+  if ($scope.currTab === 0) $scope.cart.push($scope.sabers[index]);
+  else if ($scope.currTab === 1) $scope.cart.push($scope.blasters[index]);
   else {
-   cart.splice(index, 1);
-   $scope.setRows(cart);
+   $scope.cart.splice(index, 1);
+   $scope.setRows($scope.cart);
   }
  };
  $scope.openItem = function (index) {
-  if($scope.currTab === 0) $scope.currItem = sabers[index];
-  else if($scope.currTab === 1) $scope.currItem = blasters[index];
-  else $scope.currItem = cart[index];
+  if($scope.currTab === 0) $scope.currItem = $scope.sabers[index];
+  else if($scope.currTab === 1) $scope.currItem = $scope.blasters[index];
+  else $scope.currItem = $scope.cart[index];
   $scope.currIndex = index;
  };
  $scope.exitItem = function () {
@@ -59,8 +66,8 @@ storeApp.controller('storeCtrl', function storeCtrl($scope) {
  };
  $scope.cartTotal = function () {
   var total = 0, i;
-  for(i = 0; i < cart.length; i += 1) {
-   total += cart[i].price;
+  for(i = 0; i < $scope.cart.length; i += 1) {
+   total += $scope.cart[i].price;
   }
   return total;
  };
