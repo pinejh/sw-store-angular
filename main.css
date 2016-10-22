@@ -16,11 +16,6 @@
  from {box-shadow: 0px 0px 0px #888888;}
  to {box-shadow: 0px 3px 10px #888888;}
 }
-*{
- margin:0;
- padding:0;
- font-family:'Roboto',sans-serif;
-}
 * {
  margin: 0;
  padding: 0;
@@ -86,7 +81,6 @@ body {
  right: 10%;
  top: .15em;
  font-size: 2em;
- float: left;
 }
 .right {
  position: relative;
