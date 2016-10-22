@@ -35,6 +35,10 @@ storeApp.controller('storeCtrl', function storeCtrl($scope) {
   }
  };
  $scope.currIndex = -1;
+ $scope.addRemove = function () {
+  if($scope.currTab === 2) return 'Remove From Cart';
+  else return 'Add To Cart';
+ };
  $scope.currItem = {};
  $scope.addToCart = function (index) {
   if ($scope.currTab === 0) cart.push(sabers[index]);
