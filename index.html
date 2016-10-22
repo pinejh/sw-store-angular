@@ -14,22 +14,32 @@
     <div class="nav">
      <ul class="navbar" id="nav">
       <li></li>
-      <li class="navitem" id="tab1"><h2 class="title">Lightsabers</h2><div class="selected"></div></li>
-      <li class="navitem" id="tab2"><h2 class="title">Blasters</h2></li>
-      <li class="navitem" id="tab3"><h2 class="left">Cart</h2><h3 class="right" id="total">$0.00</h3></li>
+      <li class="navitem" id="tab1" ng-click="setTab(0)"><h2 class="title">Lightsabers</h2><div ng-class="{selected:currTab==0}"></div></li>
+      <li class="navitem" id="tab2" ng-click="setTab(1)"><h2 class="title">Blasters</h2><div ng-class="{selected:currTab==1}"></div></li>
+      <li class="navitem" id="tab3" ng-click="setTab(2)"><h2 class="left">Cart</h2><h3 class="right" id="total">{{cartTotal()|currency}}</h3><div ng-class="{selected:currTab==2}"></div></li>
       <li></li>
      </ul>
     </div>
-    <table class="shop" ng-init="saberRows()">
+    <table class="shop" ng-init="setTab(2);setTab(0)">
      <tr class="row" ng-repeat="row in rows track by $index">
-      <td class="item" ng-repeat="saber in row track by $index">
-       <img ng-src="{{saber.imgsrc}}">
-       <h3 class="name">{{saber.name}}</h3>
-       <h4 class="price">{{saber.price}}</h4>
+      <td class="item" ng-click="openItem($parent.$index*3+$index)" ng-repeat="item in row track by $index">
+       <img ng-src="{{item.imgsrc}}">
+       <h3 class="name">{{item.name}}</h3>
+       <h4 class="price">{{item.price}}</h4>
       </td>
      </tr>
     </table>
     <div id="window">
+     <div id="popup" class="ng-hide" ng-show="currIndex!==-1" ng-click="exitItem()">
+      <div id="item">
+       <img ng-src="{{currItem.imgsrc}}"/>
+       <div class="text">
+        <h3 class="details">{{currItem.name}}</h3>
+        <h4 class="details">{{currItem.price|currency}}</h4>
+       </div>
+       <div id="addtocart" ng-click="addToCart(currIndex)">Add To Cart</div>
+      </div>
+     </div>
     </div>
    </div>
   </div>
